@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
-from Robot import Wheel
 from time import sleep
+from Robot import Wheel
+
 
 # init Robot
 Wheel.DEBUG = True
@@ -25,9 +26,19 @@ right = Wheel(23, 21, 19)
 #right.forward()
 #left.stop()
 
+
+
 left.start()
-sleep(3)
+right.start()
+sleep(2)
 left.stop()
+right.stop()
+left.reverse()
+right.reverse()
+sleep(2)
+left.stop()
+right.stop()
+
 
 
 GPIO.cleanup()
