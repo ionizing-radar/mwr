@@ -39,6 +39,10 @@ sleep(5)
 print "Stopping motor"
 GPIO.output(Motor2E,GPIO.LOW)
 
-sleep(1)
+#print "Stopping EVERYTHING"
+#for pin in [Motor1A, Motor1B, Motor1E, Motor2A, Motor2B, Motor2E]:
+#	print pin
+#	GPIO.output(pin,GPIO.LOW)
 
-GPIO.cleanup()
+#sleep(1)
+#GPIO.cleanup()
