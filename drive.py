@@ -11,17 +11,17 @@ print GPIO.RPI_INFO
 GPIO.setmode(GPIO.BOARD)
 
 # init left wheel
-#	GPIO 25 (pin 22) as enable
-#	GPIO 24 (pin 18) as forward
-#	GPIO 23 (pin 16) as reverse
+#	GPIO 13 (pin 33) as enable
+#	GPIO 6 (pin 31) as forward
+#	GPIO 5 (pin 29) as reverse
 
-left = Wheel(22, 18, 16)
+left = Wheel(33, 31, 29)
 
 # init right wheel 
-#	GPIO 11 (pin 23) as enable
-#	GPIO 9 (pin 21) as forward
-#	GPIO 10 (pin 19) as reverse
-right = Wheel(23, 21, 19)
+#	GPIO 22 (pin 15) as enable
+#	GPIO 27 (pin 13) as forward
+#	GPIO 17 (pin 11) as reverse
+right = Wheel(15, 13, 11)
 
 #right.forward()
 #left.stop()
