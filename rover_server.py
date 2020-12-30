@@ -2,10 +2,12 @@
 
 import socket
 
-HOST = '127.0.0.1'
+# get HOST ip from ionizing-radar.ca/russel.ip
+HOST = '192.168.0.11'
 PORT = 23500
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+	print ('Listening on',HOST,':',PORT)
 	s.bind((HOST, PORT))
 	s.listen()
 	conn, addr = s.accept()
