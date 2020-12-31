@@ -3,6 +3,8 @@
 import socket
 
 # get HOST ip from ionizing-radar.ca/russel.ip
+# at some point we should check our interfaces for the IP to serve on, and then update the IP served at ionizing-radar.ca/russel.ip
+
 HOST = '192.168.0.11'
 PORT = 23500
 
