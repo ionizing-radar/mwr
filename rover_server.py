@@ -23,4 +23,12 @@ while True:
 				data = conn.recv(1024)
 				if not data:
 					break
+				else:
+					print (data)
+					try:
+						print(json.load(data))
+					except KeyError:
+						print("not a JSON")
+
+                              
 				conn.sendall(data)
