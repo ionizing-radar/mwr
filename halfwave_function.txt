@@ -1,0 +1,2 @@
+
+ceil(cos(theta))*cos(2theta)
