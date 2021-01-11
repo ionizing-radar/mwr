@@ -1,34 +1,45 @@
 #!/usr/bin/env python3
 
+import threading
 import socket
+import json
 
-# get HOST ip from ionizing-radar.ca/russel.ip
-# at some point we should check our interfaces for the IP to serve on, and then update the IP served at ionizing-radar.ca/russel.ip
 
-HOST = '192.168.0.11'
-PORT = 23500
+DEFAULT_HOST = '192.168.0.11'
+DEFAULT_PORT = 23500
 
-while True:
-	# simple echo server
-	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-		print ('Listening on',HOST,':',PORT)
-		s.bind((HOST, PORT))
-		s.listen()
-		conn, addr = s.accept()
-		# make a connection
-		with conn:
-			print('Connect by ', addr)
-			while True:
-				# get data, echo it, loop
-				data = conn.recv(1024)
-				if not data:
-					break
-				else:
-					print (data)
-					try:
-						print(json.load(data))
-					except KeyError:
-						print("not a JSON")
+# server socket, listens for incoming connections and then handles JSON on that socket
+## the input stream should only contain JSON, otherwise it'll bork and weird things happen
 
-                              
-				conn.sendall(data)
+def serverSocket(serverIP, serverPort):
+	while True:
+		# simple echo server
+		with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+			print ('Listening on',serverIP,':',serverPort)
+			s.bind((serverIP, serverPort))
+			s.listen()
+			conn, addr = s.accept()
+			# make a connection
+			with conn:
+				print('Connect by ', addr)
+				while True:
+					# get data, echo it, loop
+					data = conn.recv(1024)
+					if not data:
+						break
+					else:
+						try:
+							print(data.decode("utf-8"))
+						except KeyError:
+							print("not a JSON")
+	                              
+					conn.sendall(data)
+					print("")
+
+def main():
+	threading.Thread(target=serverSocket(DEFAULT_HOST, DEFAULT_PORT))
+
+if __name__ == "__main__":
+	print("starting")
+	main()
+
