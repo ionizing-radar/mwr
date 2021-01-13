@@ -17,6 +17,6 @@ These polar coordinates assume UP on the joystick is 0 degrees for forwards, and
 
 For any left turn between 45 degrees and directly forwards, the left motor will slowly increase to full from stop, and between 45 and 90 degrees left the motor will slowly increase reverse speed to full reverse. For forwards movement on the joystick this can be modeled as cos(2θ) and for backwards on the joystick it is sin(2θ-π/2).
 
-![Alt Text](joystick%20to%20motor%20power%20graph.png?raw=true "Joystick-Motor power graph")
+![Alt Text](pictures/joystick%20to%20motor%20power%20graph.png?raw=true "Joystick-Motor power graph")
 
 ###### For more reading on polar coordinates check out https://www.mathsisfun.com/polar-cartesian-coordinates.html and https://mathworld.wolfram.com/PolarCoordinates.html
