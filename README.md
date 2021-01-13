@@ -13,7 +13,7 @@ These polar coordinates are translated from (x,y) coordinates of the joystick co
 
 R, or radius, is the strength of the joystick direction. So 1 is full power and 0 is of course full stop, with any value in between.
 
-These polar coordinates assume UP on the joystick is 0 degrees for forwards, and DOWN is π and -π degrees for backwards. (Negative and postive π are equal in terms of the direction of the joystick). LEFT and RIGHT are hard turns to the LEFT and RIGHT, while 45 degrees LEFT and RIGTH are slow turns. The difference between hard and slow turn is that the motor on the side to turn towards is either reversing or stopped. So for a hard turn LEFT the left motor is full reverse and the right motor is full forwards, and the opposite for a hard turn RIGHT.
+These polar coordinates assume UP on the joystick is 0 degrees for forwards, and DOWN is π and -π degrees for backwards. (Negative and postive π are equal in terms of the direction of the joystick, since in radians 0 is congruent to 2π). LEFT and RIGHT are hard turns to the LEFT and RIGHT, while 45 degrees LEFT and RIGTH are slow turns. The difference between hard and slow turn is that the motor on the side to turn towards is either reversing or stopped. So for a hard turn LEFT the left motor is full reverse and the right motor is full forwards, and the opposite for a hard turn RIGHT.
 
 For any left turn between 45 degrees and directly forwards, the left motor will slowly increase to full from stop, and between 45 and 90 degrees left the motor will slowly increase reverse speed to full reverse. For forwards movement on the joystick this can be modeled as cos(2θ) and for backwards on the joystick it is sin(2θ-π/2).
 
