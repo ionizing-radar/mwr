@@ -10,7 +10,7 @@ rover_server.py takes (r, theta) as an input. These polar coordinates assume UP 
 
 For any left turn between 45 degrees and directly forwards, the left motor will slowly increase to full from stop, and between 45 and 90 degrees left the motor will slowly increase reverse speed to full reverse. For forwards movement on the joystick this can be modeled as cos(2θ) and for backwards on the joystick it is sin(2θ-π/2).
 
-
+https://raw.githubusercontent.com/ionizing-radar/mwr/master/joystick%20to%20motor%20power%20graph.png
 
 In Wolfram Alpha this looks like:
 Right Motor: Plot[Piecewise[{{sin(2*θ-π/2),θ > pi/2}, {1, pi/2 > θ > 0},{cos(2θ), -pi/2 < θ <0}, {-1, θ < -pi/2}}], {θ, -pi, pi}]
