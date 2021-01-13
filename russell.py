@@ -122,7 +122,7 @@ try:
 	running = True
 	while running:
 		command = input("> ").lower()
-		if command in ["forward", "drive", "go", "yeet"]:
+		if command in ["g", "f", "forward", "drive", "go", "yeet"]:
 			forward()
 		elif command in ["reverse", "back"]:
 			reverse()
@@ -130,21 +130,23 @@ try:
 			left()
 		elif command in ["r","right"]:
 			right()
-		elif command in ["backleft"]:
+		elif command in ["bl", "backleft"]:
 			backleft()
-		elif command in ["backright"]:
+		elif command in ["br", "backright"]:
 			backright()
-		elif command in ["clockwise", "clock", "spinr"]:
+		elif command in ["cl", "clockwise", "clock", "spinr"]:
 			clockwise()
-		elif command in ["counterclock", "counter", "spinl"]:
+		elif command in ["cc", "counterclock", "counter", "spinl"]:
 			counterclock()
-		elif command in ["stop", "no", "bad", "bad russell"]:
+		elif command in ["s", "n", "stop", "no", "bad", "bad russell"]:
 			if command == "bad russell":
 				print ("\t:(")
 			stop()
 		elif command in ["help", "h"]:
 			help()
 		elif command in ["quit", "q", "exit", "bye"]:
+			if command == "bye":
+				print("\tbye bye!")
 			running = False
 		else:
 			print ("RUSSELL doesn't know how to '"+command+"'\n")
