@@ -69,6 +69,7 @@ def commandQueue(q):
 
 def setMotor(power, right, left):
 	print ("Right: {:.2f} \tLeft: {:.5f}".format(right,left))
+	//TODO: pwm here ...
 
 
 
