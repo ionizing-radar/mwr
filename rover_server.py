@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import threading
 import concurrent.futures
@@ -7,12 +7,24 @@ import queue
 import json
 import math
 
+import RPi.GPIO as GPIO
+import time
 
-DEFAULT_HOST = '192.168.0.11'
+# server defaults
+DEFAULT_HOST = '192.168.0.205'
 DEFAULT_PORT = 23500
 
-RIGHT_MOTOR = 0
-LEFT_MOTOR = 0
+# motor 1 setup by GPIO board pin
+# at some point GPIO pins are going to be on the SCI bus
+Motor1A = 31
+Motor1B = 29
+Motor1E = 33
+# motor 2 setup
+Motor2A = 13
+Motor2B = 11
+Motor2E = 15
+# pulse width modulation frequency - the higher this number
+MOTOR_PWM_FREQ = 100
 
 # server socket, listens for incoming connections and then handles JSON on that socket
 ## the input stream should only contain JSON, otherwise it'll bork and weird things happen
@@ -23,7 +35,7 @@ def serverSocket(serverIP, serverPort, q):
 		with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 			print ('Listening on',serverIP,':',serverPort)
 			s.bind((serverIP, serverPort))
-			s.listen()
+			s.listen(2)
 			conn, addr = s.accept()
 			# make a connection
 			with conn:
@@ -69,7 +81,7 @@ def commandQueue(q):
 
 def setMotor(power, right, left):
 	print ("Right: {:.2f} \tLeft: {:.5f}".format(right,left))
-	//TODO: pwm here ...
+	#TODO: pwm here ...
 
 
 
