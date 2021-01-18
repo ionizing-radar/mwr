@@ -96,7 +96,7 @@ def setMotor(power, right, left):
 	if (left < 0):
 		pwmM2_R.start(abs(r*left))
 		pwmM2_F.stop()
-	elif (left == 0)
+	elif (left == 0):
 		pwmM2_R.stop()
 		pwmM2_F.stop()
 	elif (left > 0):
@@ -105,6 +105,7 @@ def setMotor(power, right, left):
 
 
 def initMotors():
+	GPIO.setmode(GPIO.BOARD)
 	# setup motor pins
 	GPIO.setup(Motor1A,GPIO.OUT)
 	GPIO.setup(Motor1B,GPIO.OUT)
