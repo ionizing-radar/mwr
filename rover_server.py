@@ -10,7 +10,7 @@ import math
 import RPi.GPIO as GPIO
 import time
 
-# server defaults
+# network connection server defaults
 DEFAULT_HOST = '192.168.0.205'
 DEFAULT_PORT = 23500
 
@@ -23,6 +23,8 @@ Motor1E = 33
 Motor2A = 13
 Motor2B = 11
 Motor2E = 15
+# global for all the motors
+MOTORS = [Motor1A, Motor1B, Motor1E, Motor2A, Motor2B, Motor2E]
 # pulse width modulation frequency - the higher this number
 MOTOR_PWM_FREQ = 100
 
@@ -81,15 +83,60 @@ def commandQueue(q):
 
 def setMotor(power, right, left):
 	print ("Right: {:.2f} \tLeft: {:.5f}".format(right,left))
-	#TODO: pwm here ...
+	#3 cases for each L-R motor: moving forwards (positive), stopped (zero), or backwards (negative)
+	if (right < 0):
+		pwmM1_R.start(abs(r*right)) # to absolute value this because PWM takes postive values
+		pmwM1_F.stop()
+	elif (right == 0):
+		pwmM1_R.stop()
+		pwmM1_F.stop()
+	elif (right > 0):
+		pwmM1_F.start(r*right)
+		pwmM1_R.stop()
+	if (left < 0):
+		pwmM2_R.start(abs(r*left))
+		pwmM2_F.stop()
+	elif (left == 0)
+		pwmM2_R.stop()
+		pwmM2_F.stop()
+	elif (left > 0):
+		pwmM2_F.start(r*left)
+		pwmM2_R.stop()
 
 
+def initMotors():
+	# setup motor pins
+	GPIO.setup(Motor1A,GPIO.OUT)
+	GPIO.setup(Motor1B,GPIO.OUT)
+	GPIO.setup(Motor1E,GPIO.OUT)
+
+	GPIO.setup(Motor2A,GPIO.OUT)
+	GPIO.setup(Motor2B,GPIO.OUT)
+	GPIO.setup(Motor2E,GPIO.OUT)
+
+	# turn pins into PWM
+	pwmM1_F = GPIO.PWM(Motor1A, MOTOR_PWM_FREQ) 
+	pwmM1_R = GPIO.PWM(Motor1B, MOTOR_PWM_FREQ)
+	pwmM2_F = GPIO.PWM(Motor2A, MOTOR_PWM_FREQ) 
+	pwmM2_R = GPIO.PWM(Motor2B, MOTOR_PWM_FREQ)
+	# turn all pins off
+	dutyCycle = 0	
+	pwmM1_F.start(dutyCycle)
+	pwmM1_R.start(dutyCycle)
+	pwmM2_F.start(dutyCycle)
+	pwmM2_R.start(dutyCycle)
+
+	# enable motors
+	GPIO.output(Motor1E, GPIO.HIGH)
+	GPIO.output(Motor2E, GPIO.HIGH)
 
 def main():
 	q = queue.Queue()
 	threads = list();
 	threads.append(threading.Thread(target=serverSocket, args=(DEFAULT_HOST, DEFAULT_PORT, q,)))
 	threads.append(threading.Thread(target=commandQueue, args=(q,)))
+
+	initMotors()
 	
 	for thread in threads:
 		thread.start()
